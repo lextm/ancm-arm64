@@ -19,6 +19,8 @@ $out_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\$pathVersion\asp
 $out_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_arm64.dll"
 $out_x64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_x64.dll"
 
+& iisreset.exe /stop
+
 Remove-Item $main
 Remove-Item $main_x64
 Remove-Item $main_x86
@@ -31,5 +33,7 @@ Rename-Item $out_arm64 $out
 
 Rename-Item "$main_x86.bak" $main_x86
 Rename-Item "$out_x86.bak" $out_x86
+
+& iisreset.exe /start
 
 Write-Host "Restored."

@@ -33,6 +33,9 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
     }    
 
     Write-Host "Patch files"
+
+    & iisreset.exe /stop
+
     Rename-Item $main $main_arm64
     Rename-Item $main_x86 "$main_x86.bak"
     Rename-Item $out $out_arm64
@@ -60,6 +63,8 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
 
     Remove-Item $tempDirPath -Recurse -Force
 
+    & iisreset /start
+    
     Write-Host "Patched"
 } else {
     Write-Host "Already patched"

@@ -1,2 +1,2 @@
 EXPORTS
-    RegisterModule = aspnetcore_x64.RegisterModule
+    RegisterModule = aspnetcorev2_x64.RegisterModule
