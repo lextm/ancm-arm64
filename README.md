@@ -23,7 +23,7 @@ At last, all useful bits are in `\msi\AttachedContainer` folder, such as `AspNet
 
 1. Execute the official installer to get ARM64 bits installed to IIS.
 1. Execute `patch.ps1 -msiFolder <folder>` as administrator so that it extracts the necessary files from those MSI packages and install to the desired places.
-   > Note that this install script also installs a few helper files compiled by me. They are ARM64X pure forwarder required for ARM64/x64 side by side execution.
+   > Note that this install script also installs a few helper files compiled by me. They are ARM64X pure forwarder required for ARM64/x64 side by side execution. The source code and build script are in `src` folder.
 
 ## Restore to Default
 
