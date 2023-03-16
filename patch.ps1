@@ -51,7 +51,7 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
     $out_x64_src = Join-Path $tempDirPath "IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
     Copy-Item $out_x64_src $out_x64
 
-    Start-Process msiexec "/a `"$msiFolder\AspNetCoreModuleV2_x86.msi`" /qn TARGETDIR=`"$tempDirPath`"" -Wait
+    # Start-Process msiexec "/a `"$msiFolder\AspNetCoreModuleV2_x86.msi`" /qn TARGETDIR=`"$tempDirPath`"" -Wait
     $main_x86_src = Join-Path $tempDirPath "IIS\Asp.Net Core Module\WowOnly\aspnetcorev2.dll"
     Copy-Item $main_x86_src $main_x86
 
