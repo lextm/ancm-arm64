@@ -18,8 +18,11 @@ $pathVersion = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
 
 $out = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
 $out_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
-$out_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_arm64.dll"
-$out_x64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_x64.dll"
+# $out_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_arm64.dll"
+# $out_x64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_x64.dll"
+$out_arm64 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_arm64.dll"
+$out_x64 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_x64.dll"
+
 
 if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
 
@@ -38,7 +41,9 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
 
     Rename-Item $main $main_arm64
     Rename-Item $main_x86 "$main_x86.bak"
-    Rename-Item $out $out_arm64
+    # Rename $out $out_arm64
+    Copy-Item $out $out_arm64
+    Remove-Item $out
     Rename-Item $out_x86 "$out_x86.bak"
 
     Copy-Item .\src\aspnetcorev2.dll $main
