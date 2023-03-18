@@ -16,23 +16,24 @@ $pathVersion = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
 
 $out = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
 $out_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
-# $out_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_arm64.dll"
-# $out_x64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_x64.dll"
-$out_arm64 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_arm64.dll"
-$out_x64 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_x64.dll"
+$out_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_arm64.dll"
+$out_x64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess_x64.dll"
+$out_arm64_2 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_arm64.dll"
+$out_x64_2 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_x64.dll"
+
 & iisreset.exe /stop
 
 Remove-Item $main
 Remove-Item $main_x64
 Remove-Item $main_x86
 Remove-Item $out
+Remove-Item $out_arm64_2
 Remove-Item $out_x64
+Remove-Item $out_x64_2
 Remove-Item $out_x86
 
 Rename-Item $main_arm64 $main
-# Rename-Item $out_arm64 $out
-Copy-item $out_arm64 $out
-Remove-Item $out_arm64
+Rename-Item $out_arm64 $out
 
 Rename-Item "$main_x86.bak" $main_x86
 Rename-Item "$out_x86.bak" $out_x86
