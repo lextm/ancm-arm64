@@ -7,6 +7,8 @@ param (
     $msiFolder
 )
 
+$ErrorActionPreference = 'Continue'
+
 $main = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll"
 $main_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll"
 $main_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\aspnetcorev2_arm64.dll"
@@ -40,8 +42,8 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
 
     Rename-Item $main $main_arm64
     Rename-Item $main_x86 "$main_x86.bak"
-    Rename $out $out_arm64
     Copy-Item $out $out_arm64_2
+    Rename-Item $out $out_arm64
     Rename-Item $out_x86 "$out_x86.bak"
 
     Copy-Item .\src\aspnetcorev2.dll $main

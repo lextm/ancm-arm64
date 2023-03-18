@@ -1,5 +1,7 @@
 #Requires -RunAsAdministrator
 
+$ErrorActionPreference = 'Continue'
+
 $main = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll"
 $main_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll"
 $main_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\aspnetcorev2_arm64.dll"
