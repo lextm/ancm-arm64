@@ -3,7 +3,9 @@ Installer patches for ASP.NET Core module on Windows 11 ARM64.
 
 The official installer for .NET 7.0/8.0 at this moment only properly installs ASP.NET Core module ARM64 bits on the machine, so that only pure ARM64 ASP.NET Core web apps can run on IIS.
 
-> Note that .NET 6.0 web apps can only run in x64/x86 modes on IIS/Windows 11 ARM64. 
+> Note that .NET 6.0 web apps can only run in x64/x86 modes on IIS/Windows 11 ARM64.
+
+> Also note that once [this pull request](https://github.com/dotnet/aspnetcore/pull/47290) is merged and shipped in new hosting bundle installers, you don't need this patch any more.
 
 ## Preparation
 
