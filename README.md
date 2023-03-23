@@ -30,3 +30,9 @@ At last, all useful bits are in `\msi\AttachedContainer` folder, such as `AspNet
 ## Restore to Default
 
 1. Execute `restore.ps1` as administrator.
+
+## Ultimate Solution
+
+The changes made by this repo have been delivered to Microsoft ASP.NET Core team in dotnet/aspnetcore/issues/47115. However, they decided that no immediate action to take.
+
+**You can vote it up to indicate how important the patch is, and help prioritize the solution to be made part of the new installers.**
