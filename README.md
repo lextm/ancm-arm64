@@ -1,11 +1,11 @@
-# ancm-arm64
-Installer patches for ASP.NET Core module on Windows 11 ARM64.
+# ancm-arm64, installer patches for ASP.NET Core module on Windows 11 ARM64 and IIS.
 
+## Background
 The official installer for .NET 7.0/8.0 at this moment only properly installs ASP.NET Core module ARM64 bits on the machine, so that only pure ARM64 ASP.NET Core web apps can run on IIS.
 
 > Note that .NET 6.0 web apps can only run in x64/x86 modes on IIS/Windows 11 ARM64.
 
-> Also note that once [this pull request](https://github.com/dotnet/aspnetcore/pull/47290) is merged and shipped in new hosting bundle installers, you don't need this patch any more.
+> The changes made by this repo have been delivered to Microsoft ASP.NET Core team in dotnet/aspnetcore/issues/47115. However, they decided that no immediate action to take. **You can vote it up to indicate how important the patch is, and help prioritize the solution to be made into the future installers.**
 
 ## Preparation
 
@@ -19,7 +19,7 @@ The official installer for .NET 7.0/8.0 at this moment only properly installs AS
 
 At last, all useful bits are in `\msi\AttachedContainer` folder, such as `AspNetCoreModuleV2_*.msi`. This folder is going to be used for patching.
 
-> Note that here we use .NET 7.0.4 as an example. It applies to other versions till Microsoft officially ships the necessary changes.
+> Note that here we use .NET 7.0.4 as an example. It applies to other versions (including .NET 8 Preview) till Microsoft officially ships the necessary changes in future releases.
 
 ## Apply the Patch
 
@@ -30,9 +30,3 @@ At last, all useful bits are in `\msi\AttachedContainer` folder, such as `AspNet
 ## Restore to Default
 
 1. Execute `restore.ps1` as administrator.
-
-## Ultimate Solution
-
-The changes made by this repo have been delivered to Microsoft ASP.NET Core team in dotnet/aspnetcore/issues/47115. However, they decided that no immediate action to take.
-
-**You can vote it up to indicate how important the patch is, and help prioritize the solution to be made part of the new installers.**
