@@ -7,6 +7,8 @@ The official installer for .NET 7.0/8.0 at this moment only properly installs AS
 
 > The changes made by this repo have been delivered to Microsoft ASP.NET Core team in dotnet/aspnetcore/issues/47115. However, they decided that no immediate action to take. **You can vote it up to indicate how important the patch is, and help prioritize the solution to be made into the future installers.**
 
+> [I also wrote about my investigation on this topic in details](https://halfblood.pro/successful-and-failed-attempt-my-first-pull-request-for-asp-net-core/) and hope you find it useful.
+
 ## Preparation
 
 1. Download [the original 64 bit installer](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-aspnetcore-7.0.4-windows-hosting-bundle-installer) from Microsoft.
