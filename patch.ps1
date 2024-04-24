@@ -14,9 +14,17 @@ $main_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\aspnetcorev2.dl
 $main_arm64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\aspnetcorev2_arm64.dll"
 $main_x64 = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\aspnetcorev2_x64.dll"
 
-$version = (Get-Item $main).VersionInfo.FileVersion
-$versionParts = $version.Split(".")
-$pathVersion = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2])"
+$directoryPath = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2"
+$versionDirectories = Get-ChildItem -Path $directoryPath -Directory
+
+if ($versionDirectories.Count -ne 1) {
+    Write-Error "Expected one version directory under $directoryPath. Found $($versionDirectories.Count) directories."
+    exit 1
+} else {
+    $pathVersion = $versionDirectories[0].Name
+}
+
+Write-Host "Patching ASP.NET Core module version $pathVersion"
 
 $out = "$env:ProgramFiles\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
 $out_x86 = "${env:ProgramFiles(x86)}\IIS\Asp.Net Core Module\V2\$pathVersion\aspnetcorev2_outofprocess.dll"
