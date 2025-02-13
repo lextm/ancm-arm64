@@ -35,10 +35,13 @@ $out_x64_2 = "$env:SystemRoot\system32\inetsrv\aspnetcorev2_outofprocess_x64.dll
 
 if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
 
-    if ($msiFolder) {
-    } else {
+    if (-not $msiFolder) {
         $msiFolder = ".\msi\AttachedContainer"
     }
+
+    # switch to full path to avoid MSI extraction issues
+    $msiFolder = Resolve-Path -Path $msiFolder
+
     if (!(Test-Path $msiFolder)) {
         Write-Error "Canot find MSI package folder $msiFolder. Exit."
         exit 1
@@ -60,7 +63,12 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
     $tempPath = [System.IO.Path]::GetTempPath()
     $tempDirName = 'ANCM-{0:x}' -f (Get-Random)
     $tempDirPath = Join-Path $tempPath $tempDirName
-    Start-Process msiexec "/a `"$msiFolder\AspNetCoreModuleV2_x64.msi`" /qn TARGETDIR=`"$tempDirPath`"" -Wait
+    $process = Start-Process msiexec "/a `"$msiFolder\AspNetCoreModuleV2_x64.msi`" /qn TARGETDIR=`"$tempDirPath`"" -Wait -PassThru
+    if ($process.ExitCode -ne 0) {
+        Write-Error "msiexec process failed with exit code $($process.ExitCode). Exiting."
+        exit $process.ExitCode
+    }
+
     $main_x64_src = Join-Path $tempDirPath "IIS\Asp.Net Core Module\V2\aspnetcorev2.dll"
     Copy-Item $main_x64_src $main_x64
 
@@ -75,7 +83,7 @@ if ((Test-Path $main) -and !(Test-Path $main_arm64)) {
     $out_x86_src = Join-Path $tempDirPath "IIS\Asp.Net Core Module\WowOnly\WowOnly\aspnetcorev2_outofprocess.dll"
     Copy-Item $out_x86_src $out_x86
 
-    Remove-Item $tempDirPath -Recurse -Force
+    # Remove-Item $tempDirPath -Recurse -Force
 
     & iisreset /start
     
