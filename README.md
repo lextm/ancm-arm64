@@ -1,11 +1,12 @@
 # ancm-arm64, installer patches for ASP.NET Core module on Windows 11 ARM64 and IIS.
 
 ## Background
-The official installer for .NET 7.0/8.0 at this moment only properly installs ASP.NET Core module ARM64 bits on the machine, so that only pure ARM64 ASP.NET Core web apps can run on IIS. The application pool simply crashes when you try to host x86 or x64 web apps.
+The official installer for .NET 8.0/9.0/10.0 at this moment only properly installs ASP.NET Core module ARM64 bits on the machine, so that only pure ARM64 ASP.NET Core web apps can run on IIS. The application pool simply crashes when you try to host x86 or x64 web apps even if you enable emulation.
 
-> Note that .NET 6.0 web apps can only run in x64/x86 modes on IIS/Windows 11 ARM64. There wasn't no Windows ARM64 support in 6.0 release. 
+> Note that .NET 6.0 web apps can only run in x64/x86 modes on IIS/Windows 11 ARM64. There wasn't no Windows ARM64 support in 6.0 release, so this repo doesn't apply to .NET 6.0.
+> This repo also applies to .NET 7.0 but that release reached end of life.
 
-The changes made by this repo have been delivered to Microsoft ASP.NET Core team in dotnet/aspnetcore/issues/47115. However, they decided that no immediate action to take. **You can vote it up there and describe why the patch is important and should be included in the official installer. That might help prioritize the issue on their roadmap.**
+**The changes made by this repo have been recently accepted by Microsoft ASP.NET Core team in dotnet/aspnetcore/issues/47115. While the pull request has been merged, the patched installers for .NET 8/9/10 won't be available immediately. Please verify if the patch is needed carefully.**
 
 [I also wrote about my investigation on this topic in details](https://halfblood.pro/successful-and-failed-attempt-my-first-pull-request-for-asp-net-core/) and hope you find the technical details useful.
 
@@ -23,7 +24,7 @@ Perform the following steps to prepare the environment on your development machi
 
 At this stage, all useful bits can be found in `\msi\AttachedContainer` folder, such as `AspNetCoreModuleV2_*.msi`. This folder provides all files are later used for patching.
 
-> Note that here we use .NET 7.0.4 as an example. The same approach should apply to other versions (including .NET 8 Preview) till Microsoft officially ships the necessary changes in future releases.
+> Note that here we use .NET 7.0.4 as an example. The same approach should apply to other versions (including the latest .NET 10 Preview) till Microsoft officially ships the necessary changes in future releases.
 
 ## Apply the Patch
 
