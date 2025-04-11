@@ -3,11 +3,13 @@
 ## Background
 The official installer for .NET 8.0/9.0 at this moment only properly installs ASP.NET Core module ARM64 bits on the machine, so that only pure ARM64 ASP.NET Core web apps can run on IIS. The application pool simply crashes when you try to host x86 or x64 web apps even if you enable emulation.
 
-Note that
-*  .NET 6.0 web apps can only run in x64/x86 modes on IIS/Windows 11 ARM64. There wasn't no Windows ARM64 support in 6.0 release, so this repo doesn't apply to .NET 6.0.
-* This repo also applies to .NET 7.0 but that release reached end of life.
-* **.NET 10 Preview 2 and above already include the patches, so you don't need to apply from this repo.**
-* **The patched installers for .NET 8/9/10 won't be available immediately, but you can verify if the patch is needed carefully.**
+| .NET Version         | Patch Required?                            | Notes                                                                                       |
+|----------------------|--------------------------------------------|---------------------------------------------------------------------------------------------|
+| .NET 10 Preview 2+   | ❌ No                                       | Already patched by Microsoft; no action needed.                                            |
+| .NET 10 Preview 1    | ✅ Yes                                      | This patch applies to Preview 1 only.                                                      |
+| .NET 8.0 / 9.0       | ⚠️ Maybe                                    | Microsoft might release patched installers later. Verify carefully if patch is needed.     |
+| .NET 7.0             | ✅ Yes                                      | .NET 7.0 is end-of-life.                                                                   |
+| .NET 6.0 and below   | ❌ No                                       | .NET 6.0 and below are end-of-life and only runs in x64/x86 emulation on ARM64.            |
 
 BTW, [I also wrote about my investigation on this topic in details](https://halfblood.pro/successful-and-failed-attempt-my-first-pull-request-for-asp-net-core/) and hope you find the technical details useful when you study Windows ARM64.
 
@@ -16,7 +18,7 @@ BTW, [I also wrote about my investigation on this topic in details](https://half
 Perform the following steps to prepare the environment on your development machine,
 
 1. Download [the original 64 bit installer](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-aspnetcore-7.0.4-windows-hosting-bundle-installer) from Microsoft.
-1. Download [WiX Toolset](https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm) if it isn't installed to `%ProgramFilesX86%\WiX Toolset v3.11\bin\`.
+1. Download [WiX Toolset](https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm) if it isn't installed to `%ProgramFilesX86%\WiX Toolset v3.x\bin\`.
 1. Extract all contents from original Microsoft installer using `dark.exe` with
 
    ``` bash
