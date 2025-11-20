@@ -5,8 +5,8 @@ The official installer for .NET 8.0/9.0 at this moment only properly installs AS
 
 | .NET Version         | Patch Required?                            | Notes                                                                                       |
 |----------------------|--------------------------------------------|---------------------------------------------------------------------------------------------|
-| .NET 10 Preview 2+   | ❌ No                                       | Already patched by Microsoft; no action needed.                                            |
-| .NET 10 Preview 1    | ✅ Yes                                      | This patch applies to Preview 1 only.                                                      |
+| .NET 10 (Preview 2 and above)   | ❌ No                                       | Already patched by Microsoft; no action needed.                                            |
+| .NET 10 (Preview 1)    | ✅ Yes                                      | This patch applies to Preview 1 only.                                                      |
 | .NET 8.0 / 9.0       | ⚠️ Maybe                                    | Microsoft might release patched installers later. Verify carefully if patch is needed.     |
 | .NET 7.0             | ✅ Yes                                      | .NET 7.0 is end-of-life.                                                                   |
 | .NET 6.0 and below   | ❌ No                                       | .NET 6.0 and below are end-of-life and only runs in x64/x86 emulation on ARM64.            |
